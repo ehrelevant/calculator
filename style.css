@@ -33,11 +33,18 @@ button {
     border: 2px solid hsl(0, 0%, 40%);
 
     display: grid;
-    grid-template-columns: 85% 15%;
+    grid-template-rows: 40% 60%;
+
+    text-align: end;
 }
 
-#number_display {
-    border-right: 1px solid hsl(0, 0%, 80%);
+#operations_display {
+    font-size: 0.8em;
+    margin: auto 5px auto 5px;
+}
+
+#results_display {
+    margin: auto 5px auto 5px;
 }
 
 
