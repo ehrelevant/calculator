@@ -7,6 +7,12 @@ body {
     font-family: monospace;
 }
 
+button {
+    font-size: 0.7em;
+    font-family: monospace;
+    border-radius: 5px;
+}
+
 #calculator {
     margin: 16px;
     padding: 8px;
@@ -37,7 +43,18 @@ body {
 
 #button_pad {
     display: grid;
-    grid-template-columns: repeat(4, minmax(40px, 100px));
-    grid-template-rows: repeat(4, 40px);
+    grid-template-columns: repeat(4, minmax(40px, 80px)) minmax(30px, 60px);
+    grid-template-rows: repeat(4, 50px);
     grid-gap: 2px;
 }
+
+.delete-btn {
+    grid-area: 1/5/3/6;
+    background-color: #d8534f;
+}
+
+.clear-btn {
+    grid-area: 3/5/5/6;
+    background-color: #5bc0de;
+}
+
