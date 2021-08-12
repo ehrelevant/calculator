@@ -28,3 +28,16 @@ function operate(operator, first, second) {
             return divide(first, second);
     }
 }
+
+
+const opDis = document.querySelector('#operations_display');
+const resultsDis = document.querySelector('#results_display');
+const buttonPad = document.querySelector('#button_pad');
+buttonPad.addEventListener('click', insertValue, true);
+
+function insertValue(evt) {
+    if (evt.target.classList[0] === 'num-btn') {
+        console.log(evt.target.value);
+        resultsDis.textContent += evt.target.value;
+    }
+}
