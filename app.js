@@ -29,6 +29,7 @@ function operate(operator, first, second) {
     }
 }
 
+const MAX_ROUND = 6;
 
 const opDis = document.querySelector('#operations_display');
 const resultsDis = document.querySelector('#results_display');
@@ -43,8 +44,13 @@ function insertValue(evt) {
 
     const storedLength = storedOperation.length;
     if (evt.target.classList[0] === 'num-btn') {
-        displayStr += evt.target.value;
-        resultsDis.textContent = displayStr;
+        if (displayStr === '0') {
+            displayStr = evt.target.value;
+            resultsDis.textContent = displayStr;
+        } else {
+            displayStr += evt.target.value;
+            resultsDis.textContent = displayStr;
+        }
         if (storedLength == 1) {
             storedOperation.pop();
         }
@@ -75,7 +81,7 @@ function insertValue(evt) {
     if (evt.target.classList[0] === 'op-btn') {
         const op = evt.target.value;
         if (storedLength == 0) {
-            if (displayStr !== '' && op !== '=') {
+            if (displayStr != '' && op !== '=') {
                 storedOperation.push(Number(displayStr));
                 storedOperation.push(op);
                 displayStr = '';
@@ -86,13 +92,15 @@ function insertValue(evt) {
                 displayStr = '';
             }
         } else if (storedLength == 2 && displayStr == '') {
-            storedOperation[1] = op;
+            if (op !== '=') {
+                storedOperation[1] = op;
+            }
         } else {
             const savedOp = storedOperation.pop();
             const a = storedOperation.pop();
             const b = Number(displayStr);
 
-            const result = operate(savedOp, a, b);
+            const result = Math.round(operate(savedOp, a, b) * (10 ** MAX_ROUND)) / (10 ** MAX_ROUND);
 
             console.log(result);
             resultsDis.textContent = result;
@@ -101,6 +109,16 @@ function insertValue(evt) {
                 storedOperation.push(op);
             }
             displayStr = '';
+        }
+    }
+
+    if (evt.target.classList[0] === 'deci-btn') {
+        if (displayStr == '') {
+            displayStr = '0.';
+            resultsDis.textContent = displayStr;
+        } else {
+            displayStr += evt.target.value;
+            resultsDis.textContent = displayStr;
         }
     }
 
