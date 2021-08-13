@@ -1,34 +1,4 @@
 
-
-function add(a, b) {
-    return a + b;
-}
-
-function subtract(minuend, subtrahend) {
-    return minuend - subtrahend;
-}
-
-function multiply(a, b) {
-    return a * b;
-}
-
-function divide(dividend, divisor) {
-    return dividend / divisor;
-}
-
-function operate(operator, first, second) {
-    switch(operator) {
-        case '+':
-            return add(first, second);
-        case '-':
-            return subtract(first, second);
-        case '×':
-            return multiply(first, second);
-        case '/':
-            return divide(first, second);
-    }
-}
-
 const MAX_ROUND = 6;
 
 const opDis = document.querySelector('#operations_display');
@@ -40,8 +10,6 @@ let displayStr = '';
 let storedOperation = [];
 
 function insertValue(evt) {
-    console.log(evt.target.value);
-
     const storedLength = storedOperation.length;
     if (evt.target.classList[0] === 'num-btn') {
         if (displayStr === '0') {
@@ -124,7 +92,35 @@ function insertValue(evt) {
             resultsDis.textContent = displayStr;
         }
     }
+}
 
-    console.log(displayStr);
-    console.log(storedOperation);
+
+function operate(operator, first, second) {
+    switch(operator) {
+        case '+':
+            return add(first, second);
+        case '-':
+            return subtract(first, second);
+        case '×':
+            return multiply(first, second);
+        case '/':
+            return divide(first, second);
+    }
+}
+
+
+function add(a, b) {
+    return a + b;
+}
+
+function subtract(minuend, subtrahend) {
+    return minuend - subtrahend;
+}
+
+function multiply(a, b) {
+    return a * b;
+}
+
+function divide(dividend, divisor) {
+    return dividend / divisor;
 }
