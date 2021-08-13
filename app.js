@@ -76,7 +76,7 @@ function insertValue(evt) {
         const op = evt.target.value;
         if (storedLength == 0) {
             if (displayStr !== '' && op !== '=') {
-                storedOperation.push(parseInt(displayStr));
+                storedOperation.push(Number(displayStr));
                 storedOperation.push(op);
                 displayStr = '';
             }
@@ -90,7 +90,7 @@ function insertValue(evt) {
         } else {
             const savedOp = storedOperation.pop();
             const a = storedOperation.pop();
-            const b = parseInt(displayStr);
+            const b = Number(displayStr);
 
             const result = operate(savedOp, a, b);
 
