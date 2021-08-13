@@ -100,13 +100,16 @@ function insertValue(evt) {
             const a = storedOperation.pop();
             const b = Number(displayStr);
 
-            const result = Math.round(operate(savedOp, a, b) * (10 ** MAX_ROUND)) / (10 ** MAX_ROUND);
+            if (savedOp === '/' && b === 0) {
+                resultsDis.textContent = 'ERROR! Cannot Divide by 0.';
+            } else {
+                const result = Math.round(operate(savedOp, a, b) * (10 ** MAX_ROUND)) / (10 ** MAX_ROUND);
 
-            console.log(result);
-            resultsDis.textContent = result;
-            storedOperation.push(result);
-            if (op !== '=') {
-                storedOperation.push(op);
+                resultsDis.textContent = result;
+                storedOperation.push(result);
+                if (op !== '=') {
+                    storedOperation.push(op);
+                }
             }
             displayStr = '';
         }
