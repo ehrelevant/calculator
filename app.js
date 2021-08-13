@@ -50,17 +50,41 @@ function insertValue(evt) {
         }
     }
 
-    console.log(displayStr);
+    if (evt.target.classList[0] === 'delete-btn') {
+        if (displayStr == '') {
+            resultsDis.textContent = '';
+            opDis.textContent = '';
+            storedOperation = [];
+        } else {
+            displayStr = displayStr.slice(0, -1);
+            resultsDis.textContent = displayStr;
+        }
+    }
+
+    if (evt.target.classList[0] === 'clear-btn') {
+        if (displayStr == '') {
+            resultsDis.textContent = '';
+            opDis.textContent = '';
+            storedOperation = [];
+        } else {
+            resultsDis.textContent = '0';
+            displayStr = '';
+        }
+    }
 
     if (evt.target.classList[0] === 'op-btn') {
         const op = evt.target.value;
         if (storedLength == 0) {
-            storedOperation.push(parseInt(displayStr));
-            storedOperation.push(op);
-            displayStr = '';
+            if (displayStr !== '' && op !== '=') {
+                storedOperation.push(parseInt(displayStr));
+                storedOperation.push(op);
+                displayStr = '';
+            }
         } else if (storedLength == 1) {
-            storedOperation.push(op);
-            displayStr = '';
+            if (op !== '=') {
+                storedOperation.push(op);
+                displayStr = '';
+            }
         } else if (storedLength == 2 && displayStr == '') {
             storedOperation[1] = op;
         } else {
@@ -79,5 +103,7 @@ function insertValue(evt) {
             displayStr = '';
         }
     }
+
+    console.log(displayStr);
     console.log(storedOperation);
 }
