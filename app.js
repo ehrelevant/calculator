@@ -116,7 +116,7 @@ function insertValue(evt) {
         if (displayStr == '') {
             displayStr = '0.';
             resultsDis.textContent = displayStr;
-        } else {
+        } else if (!displayStr.includes('.')){
             displayStr += evt.target.value;
             resultsDis.textContent = displayStr;
         }
