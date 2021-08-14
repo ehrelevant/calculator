@@ -9,16 +9,47 @@ const opDis = document.querySelector('#operations_display');
 const resultsDis = document.querySelector('#results_display');
 const buttonPad = document.querySelector('#button_pad');
 
-buttonPad.addEventListener('click', insertValue, true);
 
-function insertValue(evt) {
+document.addEventListener('keydown', passKeyPress);
+
+function passKeyPress(e) {
+    let key = e.key;
+
+    if (/[0-9]/.test(key)) {
+        insertValue('num-btn', key);
+
+    } else if (/[+\-*/=(Enter)]/.test(key)) {
+        if (key === 'Enter') key = '='
+        insertValue('op-btn', key);
+
+    } else if (key === 'Backspace' || key === 'd') {
+        insertValue('delete-btn', key);
+
+    } else if (key === 'Escape' || key === 'c') {
+        insertValue('clear-btn', key);
+
+    } else if (key === '.') {
+        insertValue('deci-btn', key);
+
+    } else if (key === '~' || key === 'n') {
+        insertValue('neg-btn', key);
+
+    }
+}
+
+
+buttonPad.addEventListener('click', (e) => {
+    insertValue(e.target.classList[0], e.target.value);
+}, true);
+
+function insertValue(buttonClass, buttonValue) {
     const storedLength = storedOperation.length;
-    switch (evt.target.classList[0]) {
+    switch (buttonClass) {
         case 'num-btn':
-            addNumber(evt.target.value, storedLength);
+            addNumber(buttonValue, storedLength);
             break;
         case 'op-btn':
-            prepareOperation(evt.target.value, storedLength);
+            prepareOperation(buttonValue, storedLength);
             break;
         case 'delete-btn':
             deleteValues();
