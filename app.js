@@ -1,5 +1,6 @@
 
 const MAX_ROUND = 6;
+const DIVIDE_BY_0_MESSAGE = 'ERROR! Cannot Divide by 0.'
 
 let displayStr = '';
 let storedOperation = [];
@@ -99,7 +100,7 @@ function prepareOperation(op, storedLength) {
         const b = Number(displayStr);
 
         if (savedOp === '/' && b === 0) {
-            resultsDis.textContent = 'ERROR! Cannot Divide by 0.';
+            resultsDis.textContent = DIVIDE_BY_0_MESSAGE;
         } else {
             const result = Math.round(operate(savedOp, a, b) * (10 ** MAX_ROUND)) / (10 ** MAX_ROUND);
 
@@ -177,6 +178,7 @@ function operate(operator, first, second) {
         case '-':
             return subtract(first, second);
         case '×':
+        case '*':
             return multiply(first, second);
         case '/':
             return divide(first, second);
