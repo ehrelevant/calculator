@@ -33,7 +33,7 @@ button {
     border-radius: 10px;
 
     display: inline-block;
-    background-color: hsl(0, 0%, 80%);
+    background-color: hsl(30, 20%, 78%);
     width: auto;
 
     border-left: 3px solid hsl(0, 0%, 90%);
@@ -64,14 +64,14 @@ button {
     margin: 5px;
     min-height: 24px;
 
-    max-width: 312px;
+    max-width: 292px;
 }
 
 #results_display {
-    margin: 5px;
+    margin: 5px 15px;
     min-height: 30px;
 
-    max-width: 312px;
+    max-width: 292px;
 }
 
 
