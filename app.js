@@ -8,17 +8,17 @@ let storedOperation = [];
 const opDis = document.querySelector('#operations_display');
 const resultsDis = document.querySelector('#results_display');
 const buttonPad = document.querySelector('#button_pad');
-buttonPad.addEventListener('click', insertValue, true);
 
+buttonPad.addEventListener('click', insertValue, true);
 
 function insertValue(evt) {
     const storedLength = storedOperation.length;
     switch (evt.target.classList[0]) {
         case 'num-btn':
-            addNumber(evt, storedLength);
+            addNumber(evt.target.value, storedLength);
             break;
         case 'op-btn':
-            prepareOperation(evt, storedLength);
+            prepareOperation(evt.target.value, storedLength);
             break;
         case 'delete-btn':
             deleteValues();
@@ -36,12 +36,12 @@ function insertValue(evt) {
 }
 
 
-function addNumber(evt, storedLength) {
+function addNumber(newNum, storedLength) {
     if (displayStr === '0') {
-        displayStr = evt.target.value;
+        displayStr = newNum;
         resultsDis.textContent = displayStr;
     } else {
-        displayStr += evt.target.value;
+        displayStr += newNum;
         resultsDis.textContent = displayStr;
     }
     if (storedLength == 1) {
@@ -49,8 +49,7 @@ function addNumber(evt, storedLength) {
     }
 }
 
-function prepareOperation(evt, storedLength) {
-    const op = evt.target.value;
+function prepareOperation(op, storedLength) {
     if (storedLength == 0) {
         if (displayStr != '' && op !== '=') {
             storedOperation.push(Number(displayStr));
