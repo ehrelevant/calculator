@@ -22,7 +22,6 @@ buttonPad.addEventListener('click', (e) => {
 
 function insertValue(buttonClass, buttonValue) {
     const storedLength = storedOperation.length;
-    console.log(buttonValue);
     switch (buttonClass) {
         case 'num-btn':
             addNumber(buttonValue, storedLength);
