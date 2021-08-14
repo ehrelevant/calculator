@@ -94,7 +94,7 @@ function insertValue(evt) {
     }
 
     if (evt.target.classList[0] === 'neg-btn') {
-        if (displayStr == '') {
+        if (displayStr == '' && storedLength == 1) {
             displayStr = storedOperation[0].toString();
         }
 
