@@ -22,6 +22,7 @@ buttonPad.addEventListener('click', (e) => {
 
 function insertValue(buttonClass, buttonValue) {
     const storedLength = storedOperation.length;
+    console.log(buttonValue);
     switch (buttonClass) {
         case 'num-btn':
             addNumber(buttonValue, storedLength);
@@ -53,11 +54,17 @@ document.addEventListener('keydown', passKeyPress);
 function passKeyPress(e) {
     let key = e.key;
 
+    if (key == 'Shift') {
+        // Skip shift because it causes issues in the code
+        return;
+    }
+
     if (/[0-9]/.test(key)) {
         insertValue('num-btn', key);
 
     } else if (/[+\-*/=(Enter)]/.test(key)) {
-        if (key === 'Enter') key = '='
+        if (key === 'Enter') key = '=';
+        if (key === '*') key = '×';
         insertValue('op-btn', key);
 
     } else if (key === 'Backspace' || key === 'd') {
@@ -194,7 +201,6 @@ function operate(operator, first, second) {
         case '-':
             return subtract(first, second);
         case '×':
-        case '*':
             return multiply(first, second);
         case '/':
             return divide(first, second);
