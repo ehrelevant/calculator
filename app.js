@@ -53,15 +53,15 @@ document.addEventListener('keydown', passKeyPress);
 function passKeyPress(e) {
     let key = e.key;
 
-    if (key == 'Shift') {
-        // Skip shift because it causes issues in the code
+    if (key == 'Shift' || key == 'Control' || key == 'Alt') {
+        // Skip shift, ctrl, & alt because it causes issues in the code
         return;
     }
 
     if (/[0-9]/.test(key)) {
         insertValue('num-btn', key);
 
-    } else if (/[+\-*/=(Enter)]/.test(key)) {
+    } else if (/[+\-*/=Enter]/.test(key)) {
         if (key === 'Enter') key = '=';
         if (key === '*') key = '×';
         insertValue('op-btn', key);
