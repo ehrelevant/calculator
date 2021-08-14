@@ -118,7 +118,8 @@ function addDecimal() {
 }
 
 function negateOperation(storedLength) {
-    if (displayStr == '' && storedLength == 1) {
+    const isNegatingStored = (displayStr == '' && storedLength == 1);
+    if (isNegatingStored) {
         displayStr = storedOperation[0].toString();
     }
 
@@ -128,6 +129,10 @@ function negateOperation(storedLength) {
     } else {
         displayStr = displayStr.slice(1);
         resultsDis.textContent = displayStr;
+    }
+
+    if (isNegatingStored) {
+        storedOperation[0] = Number(displayStr);
     }
 }
 
