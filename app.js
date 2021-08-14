@@ -61,7 +61,7 @@ function passKeyPress(e) {
     if (/[0-9]/.test(key)) {
         insertValue('num-btn', key);
 
-    } else if (/[+\-*/=Enter]/.test(key)) {
+    } else if (/[+\-*/=]|(Enter)/.test(key)) {
         if (key === 'Enter') key = '=';
         if (key === '*') key = '×';
         insertValue('op-btn', key);
