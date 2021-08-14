@@ -50,22 +50,19 @@ function addNumber(newNum, storedLength) {
 }
 
 function prepareOperation(op, storedLength) {
-    if (storedLength == 0) {
-        if (displayStr != '' && op !== '=') {
+    if (op !== '=') {
+        if (storedLength == 0) {
             storedOperation.push(Number(displayStr));
             storedOperation.push(op);
             displayStr = '';
-        }
-    } else if (storedLength == 1) {
-        if (op !== '=') {
+        } else if (storedLength == 1) {
             storedOperation.push(op);
             displayStr = '';
-        }
-    } else if (storedLength == 2 && displayStr == '') {
-        if (op !== '=') {
+        } else if (storedLength == 2 && displayStr == '') {
             storedOperation[1] = op;
         }
-    } else {
+    }
+    if (storedLength == 2 && displayStr != '') {
         const savedOp = storedOperation.pop();
         const a = storedOperation.pop();
         const b = Number(displayStr);
