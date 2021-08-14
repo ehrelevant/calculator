@@ -11,6 +11,35 @@ const resultsDis = document.querySelector('#results_display');
 const buttonPad = document.querySelector('#button_pad');
 
 
+buttonPad.addEventListener('click', (e) => {
+    insertValue(e.target.classList[0], e.target.value);
+}, true);
+
+function insertValue(buttonClass, buttonValue) {
+    const storedLength = storedOperation.length;
+    switch (buttonClass) {
+        case 'num-btn':
+            addNumber(buttonValue, storedLength);
+            break;
+        case 'op-btn':
+            prepareOperation(buttonValue, storedLength);
+            break;
+        case 'delete-btn':
+            deleteValues();
+            break;
+        case 'clear-btn':
+            clearValues();
+            break;
+        case 'deci-btn':
+            addDecimal();
+            break;
+        case 'neg-btn':
+            negateOperation(storedLength);
+            break;
+    }
+}
+
+
 document.addEventListener('keydown', passKeyPress);
 
 function passKeyPress(e) {
@@ -39,33 +68,6 @@ function passKeyPress(e) {
 }
 
 
-buttonPad.addEventListener('click', (e) => {
-    insertValue(e.target.classList[0], e.target.value);
-}, true);
-
-function insertValue(buttonClass, buttonValue) {
-    const storedLength = storedOperation.length;
-    switch (buttonClass) {
-        case 'num-btn':
-            addNumber(buttonValue, storedLength);
-            break;
-        case 'op-btn':
-            prepareOperation(buttonValue, storedLength);
-            break;
-        case 'delete-btn':
-            deleteValues();
-            break;
-        case 'clear-btn':
-            clearValues();
-            break;
-        case 'deci-btn':
-            addDecimal();
-            break;
-        case 'neg-btn':
-            negateOperation(storedLength);
-            break;
-    }
-}
 
 
 function addNumber(newNum, storedLength) {
