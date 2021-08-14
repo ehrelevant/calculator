@@ -92,6 +92,20 @@ function insertValue(evt) {
             resultsDis.textContent = displayStr;
         }
     }
+
+    if (evt.target.classList[0] === 'neg-btn') {
+        if (displayStr == '') {
+            displayStr = storedOperation[0].toString();
+        }
+
+        if (displayStr.slice(0, 1) !== '-') {
+            displayStr = '-' + displayStr;
+            resultsDis.textContent = displayStr;
+        } else {
+            displayStr = displayStr.slice(1);
+            resultsDis.textContent = displayStr;
+        }
+    }
 }
 
 
