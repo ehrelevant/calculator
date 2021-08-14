@@ -4,7 +4,7 @@ const DIVIDE_BY_0_MESSAGE = 'ERROR! Cannot Divide by 0.'
 
 let displayStr = '';
 let storedOperation = [];
-
+let lastSavedFullEquation = '';
 
 const opDis = document.querySelector('#operations_display');
 const resultsDis = document.querySelector('#results_display');
@@ -14,6 +14,7 @@ const buttonPad = document.querySelector('#button_pad');
 buttonPad.addEventListener('click', (e) => {
     insertValue(e.target.classList[0], e.target.value);
 }, true);
+
 
 function insertValue(buttonClass, buttonValue) {
     const storedLength = storedOperation.length;
@@ -37,6 +38,8 @@ function insertValue(buttonClass, buttonValue) {
             negateOperation(storedLength);
             break;
     }
+    const newStoredLength = storedOperation.length;
+    updateOperationsDisplay(newStoredLength);
 }
 
 
@@ -113,6 +116,7 @@ function prepareOperation(op, storedLength) {
             }
         }
 
+        lastSavedFullEquation = `${a} ${savedOp} ${b} =`
         displayStr = '';
     }
 }
@@ -202,4 +206,21 @@ function multiply(a, b) {
 
 function divide(dividend, divisor) {
     return dividend / divisor;
+}
+
+
+
+
+function updateOperationsDisplay(storedLength) {
+    switch (storedLength) {
+        case 0:
+            opDis.textContent = '';
+            break;
+        case 1:
+            opDis.textContent = lastSavedFullEquation;
+            break;
+        case 2:
+            opDis.textContent = `${storedOperation[0]} ${storedOperation[1]}`
+            break;
+    }
 }
