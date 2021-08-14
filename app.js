@@ -4,7 +4,11 @@ const DIVIDE_BY_0_MESSAGE = 'ERROR! Cannot Divide by 0.'
 
 let displayStr = '';
 let storedOperation = [];
-let lastSavedFullEquation = '';
+
+// The use of this "lastSavedEquation" global variable may be a naive implementation;
+// however, given given the structure of my code, I couldn't think of a better method of
+// Pasing the last equation to the variable.
+let lastSavedEquation = '';
 
 const opDis = document.querySelector('#operations_display');
 const resultsDis = document.querySelector('#results_display');
@@ -38,6 +42,7 @@ function insertValue(buttonClass, buttonValue) {
             negateOperation(storedLength);
             break;
     }
+
     const newStoredLength = storedOperation.length;
     updateOperationsDisplay(newStoredLength);
 }
@@ -83,6 +88,9 @@ function addNumber(newNum, storedLength) {
     }
     if (storedLength == 1) {
         storedOperation.pop();
+    } else if (storedLength == 2) {
+
+        lastSavedEquation = `${storedOperation[0]} ${storedOperation[1]}`
     }
 }
 
@@ -98,6 +106,8 @@ function prepareOperation(op, storedLength) {
         } else if (storedLength == 2 && displayStr == '') {
             storedOperation[1] = op;
         }
+
+        lastSavedEquation = `${storedOperation[0]} ${storedOperation[1]}`
     }
     if (storedLength == 2 && displayStr != '') {
         const savedOp = storedOperation.pop();
@@ -116,7 +126,7 @@ function prepareOperation(op, storedLength) {
             }
         }
 
-        lastSavedFullEquation = `${a} ${savedOp} ${b} =`
+        lastSavedEquation = `${a} ${savedOp} ${b} =`
         displayStr = '';
     }
 }
@@ -212,15 +222,10 @@ function divide(dividend, divisor) {
 
 
 function updateOperationsDisplay(storedLength) {
-    switch (storedLength) {
-        case 0:
-            opDis.textContent = '';
-            break;
-        case 1:
-            opDis.textContent = lastSavedFullEquation;
-            break;
-        case 2:
-            opDis.textContent = `${storedOperation[0]} ${storedOperation[1]}`
-            break;
+    if (storedLength == 0) {
+        opDis.textContent = '';
+        lastSavedEquation = '';
+    } else {
+        opDis.textContent = lastSavedEquation;
     }
 }
